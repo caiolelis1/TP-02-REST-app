@@ -10,42 +10,23 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String regiaoCorreta;
-    private String[] regioes = new String[]{"BR", "NA", "EU", "KR"};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, regioes);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         final EditText summoner = findViewById(R.id.search);
         final Button invocador = findViewById(R.id.summoner);
         final Button campeao = findViewById(R.id.champion);
-        Spinner regiao = findViewById(R.id.spinner);
-
-        regiao.setAdapter(adapter);
-
-        regiao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                regiaoCorreta = regioes[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-
-        });
 
         invocador.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,16 +43,24 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<Summoner> call, Response<Summoner> response) {
                         Summoner jogador = response.body();
 
-                        Intent intent = new Intent(MainActivity.this, SummonerPage.class);
+//                        if(jogador.name.equals(null)){
+//                            Toast toast = Toast.makeText(MainActivity.this, "Não existe invocador com este nome", Toast.LENGTH_SHORT);
+//                            toast.show();
+//                        } else {
 
-                        Bundle args = new Bundle();
-                        args.putString("name", jogador.name);
-                        args.putLong("id", jogador.id);
-                        args.putLong("accountId", jogador.accountId);
-                        args.putLong("summonerLevel", jogador.summonerLevel);
-                        intent.putExtras(args);
+                            Intent intent = new Intent(MainActivity.this, SummonerPage.class);
 
-                        startActivity(intent);
+
+                            Bundle args = new Bundle();
+                            args.putString("name", jogador.name);
+                            args.putLong("id", jogador.id);
+                            args.putLong("accountId", jogador.accountId);
+                            args.putLong("summonerLevel", jogador.summonerLevel);
+                            args.putInt("profileIconId", jogador.profileIconId);
+                            intent.putExtras(args);
+
+                            startActivity(intent);
+//                        }
                     }
 
                     @Override

@@ -29,6 +29,6 @@ public class Summoner {
     @SerializedName("rank")
     @Expose public String rank;
 
-
-    @Expose ArrayList<Match> matches;
+    @SerializedName("profileIconId")
+    @Expose public int profileIconId;
 }

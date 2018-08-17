@@ -3,6 +3,7 @@ package br.ufmg.coltec.lolzinho;
 import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ChampionPage extends AppCompatActivity {
@@ -22,5 +23,8 @@ public class ChampionPage extends AppCompatActivity {
         nome.setText(name);
         TextView titulo = findViewById(R.id.titulo);
         titulo.setText(title);
+
+        new DownloadImageTask((ImageView) findViewById(R.id.imageView3))
+                .execute("http://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/"+ name  +".png");
     }
 }

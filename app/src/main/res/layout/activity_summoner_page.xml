@@ -42,6 +42,7 @@
         android:layout_height="20dp"
         android:layout_alignBottom="@+id/profile"
         android:layout_alignStart="@+id/level"
+        android:layout_toStartOf="@+id/eloTier"
         android:text="Elo"
         tools:layout_editor_absoluteX="141dp"
         tools:layout_editor_absoluteY="86dp" />
@@ -50,9 +51,8 @@
         android:id="@+id/eloTier"
         android:layout_width="66dp"
         android:layout_height="20dp"
-        android:layout_alignBaseline="@+id/eloRank"
-        android:layout_alignBottom="@+id/eloRank"
-        android:layout_toEndOf="@+id/eloRank"
+        android:layout_alignBottom="@+id/eloImage"
+        android:layout_toStartOf="@+id/eloImage"
         android:text="Elo"
         tools:layout_editor_absoluteX="141dp"
         tools:layout_editor_absoluteY="86dp" />
